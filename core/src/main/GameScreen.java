@@ -4,10 +4,12 @@ import com.badlogic.gdx.Screen;
 
 public class GameScreen implements Screen
 {
+	private World world;
+
 	@Override
 	public void render(float delta)
 	{
-
+		world.render(delta);
 	}
 
 	@Override
@@ -19,13 +21,13 @@ public class GameScreen implements Screen
 	@Override
 	public void show()
 	{
-
+		world = new World();
 	}
 
 	@Override
 	public void hide()
 	{
-
+		dispose();
 	}
 
 	@Override
@@ -43,6 +45,6 @@ public class GameScreen implements Screen
 	@Override
 	public void dispose()
 	{
-
+		world.dispose();
 	}
 }
