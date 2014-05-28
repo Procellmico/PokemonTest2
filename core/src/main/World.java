@@ -13,6 +13,8 @@ public class World implements Disposable
 	private OrthogonalTiledMapRenderer mapRenderer;
 	private OrthographicCamera camera;
 	private Player player;
+	private int[] bgLayer;
+	private int[] fgLayer;
 
 	public World()
 	{
@@ -22,15 +24,19 @@ public class World implements Disposable
 		camera.setToOrtho(false, Global.TILES_IN_WIDTH, Global.TILES_IN_WIDTH / 16f * 9f);
 
 		player = new Player(5, 5);
-
 		Gdx.input.setInputProcessor(InputManager.getInstance(player));
+
+		bgLayer = new int[]{0};
+		fgLayer = new int[]{map.getLayers().getCount() - 1};
 	}
 
 	public void render(float delta)
 	{
 		camera.update();
 		mapRenderer.setView(camera);
-		mapRenderer.render();
+		mapRenderer.render(bgLayer);
+		player.render(delta);
+		mapRenderer.render(fgLayer);
 	}
 
 	@Override
