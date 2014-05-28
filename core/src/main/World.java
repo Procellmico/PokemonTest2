@@ -23,7 +23,7 @@ public class World implements Disposable
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Global.TILES_IN_WIDTH, Global.TILES_IN_WIDTH / 16f * 9f);
 
-		player = new Player(5, 5);
+		player = new Player(5, 5, camera);
 		Gdx.input.setInputProcessor(InputManager.getInstance(player));
 
 		bgLayer = new int[]{0};
