@@ -2,6 +2,8 @@
 
 In which I attempt to recreate a Pokemon Game. I've actually attempted this before, I'm now just redoing it and using Github/Git as version control in case I do something horribly wrong :P
 
+Written in Java using the Libgdx library.
+
 **Changes:**
 
 May 28, 2014
