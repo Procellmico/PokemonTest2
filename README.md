@@ -1,8 +1,11 @@
 ##Pokemon Test
 
-In which I attempt to recreate a Pokemon Game. I've actually attempted this before, I'm now just redoing it and using Github/Git as version control in case I do something horribly wrong :P
+In which I attempt to recreate a Pokemon game. I've actually attempted this before, I'm now just redoing it and using Github/Git as version control in case I do something horribly wrong :P
 
 Written in Java using the Libgdx library.
+
+Sample image as of May 28, 2014:
+![5282014](https://cdn.mediacru.sh/yZbb-1-f__f6.png)
 
 **Changes:**
 
