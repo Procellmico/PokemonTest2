@@ -1,5 +1,6 @@
 package main;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -11,6 +12,7 @@ public class World implements Disposable
 	private TiledMap map;
 	private OrthogonalTiledMapRenderer mapRenderer;
 	private OrthographicCamera camera;
+	private Player player;
 
 	public World()
 	{
@@ -18,6 +20,10 @@ public class World implements Disposable
 		mapRenderer = new OrthogonalTiledMapRenderer(map, Global.UNIT_SCALE);
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Global.TILES_IN_WIDTH, Global.TILES_IN_WIDTH / 16f * 9f);
+
+		player = new Player(5, 5);
+
+		Gdx.input.setInputProcessor(InputManager.getInstance(player));
 	}
 
 	public void render(float delta)
@@ -30,6 +36,7 @@ public class World implements Disposable
 	@Override
 	public void dispose()
 	{
+		player.dispose();
 		map.dispose();
 		mapRenderer.dispose();
 	}
