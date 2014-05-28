@@ -6,4 +6,5 @@ In which I attempt to recreate a Pokemon Game. I've actually attempted this befo
 
 May 28, 2014
 
-Initial Commit, and some other stuff. Got the map renderer working but that's pretty much it.
+- Initial Commit, and some other stuff. Got the map renderer working but that's pretty much it.
+- Nearly trashed the whole repository because I'm such a git noob. Had to revert back to previous commits
