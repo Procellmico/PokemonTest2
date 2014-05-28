@@ -1,8 +1,12 @@
+##Project stuff
+
 build.gradle
 gradle.properties
 gradlew
 gradlew.bat
 settings.gradle
+core/src/PokemonTest2.gwt.xml
+core/assets
 
 ## Java
 
