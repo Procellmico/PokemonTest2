@@ -12,11 +12,11 @@ public class Art
 
 	public static void loadArt()
 	{
-		playerDownWalk = new Texture("playerDownWalk.png");
-		playerIdle = new Texture("playerIdle.png");
-		playerUpWalk = new Texture("playerUpWalk.png");
-		playerLeftWalk = new Texture("playerLeftWalk.png");
-		playerRightWalk = new Texture("playerRightWalk.png");
+		playerDownWalk = new Texture("playerDownWalk2.png");
+		playerIdle = new Texture("playerIdle2.png");
+		playerUpWalk = new Texture("playerUpWalk2.png");
+		playerLeftWalk = new Texture("playerLeftWalk2.png");
+		playerRightWalk = new Texture("playerRightWalk2.png");
 	}
 
 	public static void disposeArt()
