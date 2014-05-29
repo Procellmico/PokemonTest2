@@ -20,7 +20,7 @@ public class Player implements Disposable
 	private float counter = 0f;
 	private Vector2[] cellsAroundPlayer;
 	private boolean[] allowedMovement;
-	private TiledMapTileLayer colLayer;
+	private TiledMapTileLayer data;
 
 	private static final int IDLE_STATE = 0;
 	private static final int WALKING_STATE = 1;
@@ -34,7 +34,7 @@ public class Player implements Disposable
 		camera = cam;
 		currentState = IDLE_STATE;
 		currentDirection = Direction.SOUTH;
-		colLayer = col;
+		data = col;
 
 		input = new InputManager(this);
 		Gdx.input.setInputProcessor(input);
@@ -75,8 +75,30 @@ public class Player implements Disposable
 
 		if (currentState == WALKING_STATE)
 		{
+			if (allowedMovement[currentDirection.ordinal()])
+			{
+				position.add(currentDirection.getVelocity(Global.SPEED));
+			}
 
+			if (shouldBeIdle(position.x) && shouldBeIdle(position.y))
+			{
+				updateSurroundingCells();
+
+				if (!Gdx.input.isKeyPressed(currentDirection.getKey()))
+				{
+					position.x = Math.round(position.x);
+					position.y = Math.round(position.y);
+					currentState = IDLE_STATE;
+				}
+			}
 		}
+	}
+
+	private boolean shouldBeIdle(float val)
+	{
+		int vali = (int)val;
+		float rem = Math.abs(val - vali);
+		return (rem <= Global.SPEED || (1f - rem <= Global.SPEED));
 	}
 
 	private void updateSurroundingCells()
@@ -88,13 +110,25 @@ public class Player implements Disposable
 
 		for (int i = 0; i < Direction.length; i++)
 		{
-			allowedMovement[i] = colLayer.getCell((int)cellsAroundPlayer[i].x, (int)cellsAroundPlayer[i].y) == null;
+			TiledMapTileLayer.Cell cell = data.getCell((int)cellsAroundPlayer[i].x, (int)cellsAroundPlayer[i].y);
+			if (cell == null)
+			{
+				allowedMovement[i] = true;
+			}
+			else if (cell.getTile().getProperties().containsKey("collidable"))
+			{
+				allowedMovement[i] = false;
+			}
+			else
+			{
+				throw new RuntimeException("What?"); //debug
+			}
 		}
 	}
 
 	public void onKeyPressed(int keycode)
 	{
-		if (isDirectionKey(keycode))
+		if (currentState == IDLE_STATE && isDirectionKey(keycode))
 		{
 			switch (keycode)
 			{
@@ -125,7 +159,7 @@ public class Player implements Disposable
 
 	public void onKeyTapped(int keycode)
 	{
-		if (isDirectionKey(keycode))
+		if (currentState == IDLE_STATE && isDirectionKey(keycode))
 		{
 			switch (keycode)
 			{
@@ -158,6 +192,11 @@ public class Player implements Disposable
 	public float getMiddleOriginY()
 	{
 		return position.y + 0.5f;
+	}
+
+	public Vector2 getPosition()
+	{
+		return position;
 	}
 
 	@Override
