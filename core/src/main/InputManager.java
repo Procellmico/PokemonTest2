@@ -22,6 +22,7 @@ public class InputManager extends InputAdapter
 		{
 			if (isKeyPressed[i])
 			{
+				timePressed[i] += Gdx.graphics.getDeltaTime();
 				if (timePressed[i] > Global.HOLD_THRESHOLD)
 				{
 					player.onKeyPressed(i);
@@ -36,7 +37,6 @@ public class InputManager extends InputAdapter
 
 	public boolean keyDown(int keycode)
 	{
-		timePressed[keycode] += Gdx.graphics.getDeltaTime();
 		isKeyPressed[keycode] = true;
 		return true;
 	}
