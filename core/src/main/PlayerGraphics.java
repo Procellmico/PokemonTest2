@@ -13,7 +13,7 @@ public class PlayerGraphics
 	public PlayerGraphics(float frameTime)
 	{
 		walkingAnimation = new Animation[4];
-		walkingAnimation[Direction.NORTH.ordinal()] = new Animation(frameTime, getFrames(Art.playerUpWalk, 1, 4));
+		walkingAnimation[Direction.NORTH.ordinal()] = new Animation(frameTime, getFrames(Art.playerUpWalk, 2, 2));
 		walkingAnimation[Direction.SOUTH.ordinal()] = new Animation(frameTime, getFrames(Art.playerDownWalk, 2, 2));
 		walkingAnimation[Direction.EAST.ordinal()] = new Animation(frameTime, getFrames(Art.playerRightWalk, 2, 2));
 		walkingAnimation[Direction.WEST.ordinal()] = new Animation(frameTime, getFrames(Art.playerLeftWalk, 2, 2));
