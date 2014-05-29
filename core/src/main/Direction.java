@@ -25,7 +25,7 @@ public class Direction
 		return velocity.cpy().scl(speed, speed);
 	}
 
-	public int getNum()
+	public int ordinal()
 	{
 		return ID;
 	}
