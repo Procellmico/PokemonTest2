@@ -1,7 +1,9 @@
 package main;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -14,12 +16,17 @@ public class Player implements Disposable
 	private int currentState = -1;
 	private Direction currentDirection;
 	private float animationCounter = 0f;
+	private InputManager input;
+	private float counter = 0f;
+	private Vector2[] cellsAroundPlayer;
+	private boolean[] allowedMovement;
+	private TiledMapTileLayer colLayer;
 
 	private static final int IDLE_STATE = 0;
 	private static final int WALKING_STATE = 1;
 	private static final int RUNNING_STATE = 2;
 
-	public Player(float x, float y, OrthographicCamera cam)
+	public Player(float x, float y, OrthographicCamera cam, TiledMapTileLayer col)
 	{
 		position = new Vector2(x, y);
 		graphics = new PlayerGraphics(1f / 6f);
@@ -27,13 +34,24 @@ public class Player implements Disposable
 		camera = cam;
 		currentState = IDLE_STATE;
 		currentDirection = Direction.SOUTH;
+		colLayer = col;
+
+		input = new InputManager(this);
+		Gdx.input.setInputProcessor(input);
+
+		allowedMovement = new boolean[4];
+		cellsAroundPlayer = new Vector2[4];
+		for(int i = 0; i < cellsAroundPlayer.length; i++) //thanks Riven!
+		{
+			cellsAroundPlayer[i] = new Vector2();
+		}
 	}
 
 	public void render(float delta)
 	{
-		animationCounter += delta;
+		update(delta);
 
-		switch(currentState)
+		switch (currentState)
 		{
 		case IDLE_STATE:
 			graphics.currentTexture = graphics.idle[currentDirection.ordinal()];
@@ -49,8 +67,97 @@ public class Player implements Disposable
 		batch.end();
 	}
 
-	public void onKeyTap(int keycode)
+	private void update(float delta)
 	{
+		animationCounter += delta;
+
+		input.update();
+
+		if (currentState == WALKING_STATE)
+		{
+
+		}
+	}
+
+	private void updateSurroundingCells()
+	{
+		cellsAroundPlayer[Direction.NORTH.ordinal()].set((int) this.getMiddleOriginX(), (int) (this.getMiddleOriginY() + 1f));
+		cellsAroundPlayer[Direction.SOUTH.ordinal()].set((int) this.getMiddleOriginX(), (int) (this.getMiddleOriginY() - 1f));
+		cellsAroundPlayer[Direction.EAST.ordinal()].set((int) (this.getMiddleOriginX() + 1f), (int) this.getMiddleOriginY());
+		cellsAroundPlayer[Direction.WEST.ordinal()].set((int) (this.getMiddleOriginX() - 1f), (int) this.getMiddleOriginY());
+
+		for (int i = 0; i < Direction.length; i++)
+		{
+			allowedMovement[i] = colLayer.getCell((int)cellsAroundPlayer[i].x, (int)cellsAroundPlayer[i].y) == null;
+		}
+	}
+
+	public void onKeyPressed(int keycode)
+	{
+		if (isDirectionKey(keycode))
+		{
+			switch (keycode)
+			{
+			case KeyBinding.UP:
+				currentDirection = Direction.NORTH;
+				break;
+			case KeyBinding.DOWN:
+				currentDirection = Direction.SOUTH;
+				break;
+			case KeyBinding.LEFT:
+				currentDirection = Direction.WEST;
+				break;
+			case KeyBinding.RIGHT:
+				currentDirection = Direction.EAST;
+				break;
+			}
+
+			if (Gdx.input.isKeyPressed(KeyBinding.B_BUTTON))
+			{
+				currentState = RUNNING_STATE;
+			}
+			else
+			{
+				currentState = WALKING_STATE;
+			}
+		}
+	}
+
+	public void onKeyTapped(int keycode)
+	{
+		if (isDirectionKey(keycode))
+		{
+			switch (keycode)
+			{
+			case KeyBinding.UP:
+				currentDirection = Direction.NORTH;
+				break;
+			case KeyBinding.DOWN:
+				currentDirection = Direction.SOUTH;
+				break;
+			case KeyBinding.LEFT:
+				currentDirection = Direction.WEST;
+				break;
+			case KeyBinding.RIGHT:
+				currentDirection = Direction.EAST;
+				break;
+			}
+		}
+	}
+
+	private boolean isDirectionKey(int i)
+	{
+		return i == KeyBinding.DOWN || i == KeyBinding.LEFT || i == KeyBinding.RIGHT || i == KeyBinding.UP;
+	}
+
+	public float getMiddleOriginX()
+	{
+		return position.x + 0.5f;
+	}
+
+	public float getMiddleOriginY()
+	{
+		return position.y + 0.5f;
 	}
 
 	@Override
