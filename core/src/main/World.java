@@ -1,6 +1,5 @@
 package main;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -24,7 +23,6 @@ public class World implements Disposable
 		camera.setToOrtho(false, Global.TILES_IN_WIDTH, Global.TILES_IN_WIDTH / 16f * 9f);
 
 		player = new Player(5, 5, camera);
-		Gdx.input.setInputProcessor(InputManager.getInstance(player));
 
 		bgLayer = new int[]{0};
 		fgLayer = new int[]{map.getLayers().getCount() - 1};
