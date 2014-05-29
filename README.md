@@ -4,7 +4,7 @@ In which I attempt to recreate a Pokemon game. I've actually attempted this befo
 
 Written in Java using the Libgdx library.
 
-Sample image as of May 28, 2014:
+Sample image as of May 29, 2014:
 ![5/29/2014](https://mediacru.sh/e3E-E8yqnGSC.png)
 
 **Changes:**
