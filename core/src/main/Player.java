@@ -146,14 +146,7 @@ public class Player implements Disposable
 				break;
 			}
 
-			if (Gdx.input.isKeyPressed(KeyBinding.B_BUTTON))
-			{
-				currentState = RUNNING_STATE;
-			}
-			else
-			{
-				currentState = WALKING_STATE;
-			}
+			currentState = WALKING_STATE;
 		}
 	}
 
