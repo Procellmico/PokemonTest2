@@ -5,9 +5,13 @@ In which I attempt to recreate a Pokemon game. I've actually attempted this befo
 Written in Java using the Libgdx library.
 
 Sample image as of May 28, 2014:
-![5282014](https://cdn.mediacru.sh/yZbb-1-f__f6.png)
+![5/29/2014](https://mediacru.sh/e3E-E8yqnGSC.png)
 
 **Changes:**
+
+May 29, 2014
+
+- Made the player movable and added collision stuff
 
 May 28, 2014
 
