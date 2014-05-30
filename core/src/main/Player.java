@@ -64,9 +64,10 @@ public class Player implements Disposable
 		float texWidth = 1f;
 		float texHeight = (float)graphics.currentTexture.getRegionHeight() / (float)graphics.currentTexture.getRegionWidth();
 
+		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		batch.draw(graphics.currentTexture, position.x, position.y + 0.03125f, texWidth, texHeight);
+		batch.draw(graphics.currentTexture, position.x, position.y + Global.UNIT_SCALE, texWidth, texHeight);
 		batch.end();
 	}
 

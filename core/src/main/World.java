@@ -18,12 +18,12 @@ public class World implements Disposable
 
 	public World()
 	{
-		map = new TmxMapLoader().load("PokemonMap2.tmx");
+		map = new TmxMapLoader().load("PokemonMap3.tmx");
 		mapRenderer = new OrthogonalTiledMapRenderer(map, Global.UNIT_SCALE);
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Global.TILES_IN_WIDTH, Global.TILES_IN_WIDTH / 16f * 9f);
 
-		player = new Player(5, 5, camera, (TiledMapTileLayer)map.getLayers().get("data"));
+		player = new Player(2, 2, camera, (TiledMapTileLayer)map.getLayers().get("data"));
 
 		bgLayer = new int[]{0};
 		fgLayer = new int[]{map.getLayers().getCount() - 1};

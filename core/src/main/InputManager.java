@@ -16,6 +16,11 @@ public class InputManager extends InputAdapter
 		timePressed = new float[256];
 	}
 
+	public boolean isKeyPressed(int keycode)
+	{
+		return isKeyPressed[keycode];
+	}
+
 	public void update()
 	{
 		for (int i = 0; i < 256; i++)
