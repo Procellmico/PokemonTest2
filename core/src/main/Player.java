@@ -29,7 +29,7 @@ public class Player implements Disposable
 	public Player(float x, float y, OrthographicCamera cam, TiledMapTileLayer col)
 	{
 		position = new Vector2(x, y);
-		graphics = new PlayerGraphics(1f / 6f);
+		graphics = new PlayerGraphics(1f / 8f);
 		batch = new SpriteBatch();
 		camera = cam;
 		currentState = IDLE_STATE;
@@ -61,9 +61,12 @@ public class Player implements Disposable
 			break;
 		}
 
+		float texWidth = 1f;
+		float texHeight = (float)graphics.currentTexture.getRegionHeight() / (float)graphics.currentTexture.getRegionWidth();
+
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		batch.draw(graphics.currentTexture, position.x, position.y, 1f, (float)graphics.currentTexture.getRegionHeight() / (float)graphics.currentTexture.getRegionWidth());
+		batch.draw(graphics.currentTexture, position.x, position.y + 0.03125f, texWidth, texHeight);
 		batch.end();
 	}
 
@@ -86,8 +89,8 @@ public class Player implements Disposable
 
 				if (!Gdx.input.isKeyPressed(currentDirection.getKey()))
 				{
-					position.x = Math.round(position.x);
-					position.y = Math.round(position.y);
+					//position.x = Math.round(position.x);
+					//position.y = Math.round(position.y);
 					currentState = IDLE_STATE;
 				}
 			}
