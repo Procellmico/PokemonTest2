@@ -9,6 +9,11 @@ Sample image as of May 29, 2014:
 
 **Changes:**
 
+May 30, 2014
+
+- Made the images/cell width 16 px instead of 32 px to fix some render issues
+- Changed some moving/animation stuff
+
 May 29, 2014
 
 - Made the player movable and added collision stuff
