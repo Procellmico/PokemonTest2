@@ -21,10 +21,10 @@ public class Player implements Disposable
 	private Vector2[] cellsAroundPlayer;
 	private boolean[] allowedMovement;
 	private TiledMapTileLayer data;
+	private boolean isRunning;
 
 	private static final int IDLE_STATE = 0;
 	private static final int WALKING_STATE = 1;
-	private static final int RUNNING_STATE = 2;
 
 	public Player(float x, float y, OrthographicCamera cam, TiledMapTileLayer col)
 	{
@@ -35,6 +35,7 @@ public class Player implements Disposable
 		currentState = IDLE_STATE;
 		currentDirection = Direction.SOUTH;
 		data = col;
+		isRunning = false;
 
 		input = new InputManager(this);
 		Gdx.input.setInputProcessor(input);
@@ -61,6 +62,11 @@ public class Player implements Disposable
 			break;
 		}
 
+		if (isRunning)
+		{
+			graphics.currentTexture = graphics.runningAnimation[currentDirection.ordinal()].getKeyFrame(animationCounter, true);
+		}
+
 		float texWidth = 1f;
 		float texHeight = (float)graphics.currentTexture.getRegionHeight() / (float)graphics.currentTexture.getRegionWidth();
 
@@ -74,6 +80,7 @@ public class Player implements Disposable
 	private void update(float delta)
 	{
 		animationCounter += delta;
+		isRunning = Gdx.input.isKeyPressed(KeyBinding.B_BUTTON) && currentState == WALKING_STATE;
 
 		input.update();
 
@@ -81,7 +88,7 @@ public class Player implements Disposable
 		{
 			if (allowedMovement[currentDirection.ordinal()])
 			{
-				position.add(currentDirection.getVelocity(Global.SPEED));
+				position.add(currentDirection.getVelocity(Global.SPEED * (isRunning ? 2 : 1)));
 			}
 
 			if (shouldBeIdle(position.x) && shouldBeIdle(position.y))
