@@ -1,6 +1,6 @@
 ##Pokemon Test
 
-In which I attempt to recreate a Pokemon game. I've actually attempted this before, I'm now just redoing it and using Github/Git as version control in case I do something horribly wrong :P
+In which I attempt to recreate a Pokemon game. Hopefully by some time in the future I would have created a working Pokemon clone.
 
 Written in Java using the Libgdx library.
 
