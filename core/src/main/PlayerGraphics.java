@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class PlayerGraphics
 {
 	public Animation[] walkingAnimation;
+	public Animation[] runningAnimation;
 	public TextureRegion[] idle;
 	public TextureRegion currentTexture;
 
@@ -19,6 +20,12 @@ public class PlayerGraphics
 		walkingAnimation[Direction.WEST.ordinal()] = new Animation(frameTime, getFrames(Art.playerLeftWalk, 2, 2));
 
 		idle = getFrames(Art.playerIdle, 2, 2);
+
+		runningAnimation = new Animation[4];
+		runningAnimation[Direction.NORTH.ordinal()] = new Animation(frameTime * 0.75f, getFrames(Art.playerUpRun, 2, 2));
+		runningAnimation[Direction.SOUTH.ordinal()] = new Animation(frameTime * 0.75f, getFrames(Art.playerDownRun, 2, 2));
+		runningAnimation[Direction.EAST.ordinal()] = new Animation(frameTime * 0.75f, getFrames(Art.playerRightRun, 2, 2));
+		runningAnimation[Direction.WEST.ordinal()] = new Animation(frameTime * 0.75f, getFrames(Art.playerLeftRun, 2, 2));
 	}
 
 	/*
