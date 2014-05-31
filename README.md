@@ -9,6 +9,11 @@ Sample image as of May 29, 2014:
 
 **Changes:**
 
+May 31, 2014
+
+- Added running animations
+- Implemented running for the player
+
 May 30, 2014
 
 - Made the images/cell width 16 px instead of 32 px to fix some render issues
