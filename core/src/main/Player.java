@@ -17,7 +17,6 @@ public class Player implements Disposable
 	private Direction currentDirection;
 	private float animationCounter = 0f;
 	private InputManager input;
-	private float counter = 0f;
 	private Vector2[] cellsAroundPlayer;
 	private boolean[] allowedMovement;
 	private TiledMapTileLayer data;
